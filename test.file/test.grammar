@@ -1,0 +1,44 @@
+%header%
+
+GRAMMARTYPE = "LL"
+
+DESCRIPTION = "Nothing important."
+
+AUTHOR      = "UNIDY"
+VERSION     = "0.0"
+DATE        = "15 Feb 2018"
+
+LICENSE     = "Nothing important."
+
+COPYRIGHT   = "Copyright (c) 2017-2018 UNIDY. All rights reserved."
+
+
+%tokens%
+
+ADD         = "+"
+SUB         = "-"
+MUL         = "*"
+DIV         = "/"
+LP          = "("
+RP          = ")"
+IF          = "if"
+THEN        = "then"
+ELSE        = "else"
+NUM         = <<[1-9][0-9]*>>
+ID          = <<[a-zA-Z][a-zA-Z0-9_]*>>
+AS          = "<-"
+GT          = ">"
+LT          = "<"
+GE          = ">="
+LE          = "<="
+EQ          = "="
+NE          = "<>"
+WHITESPACE  = <<[ \t\n\r]+>> %ignore%
+
+%productions%
+X           = IF M THEN Z ELSE Z;
+Z           = ID AS A;
+M           = A ( GT A | LT A | GE A | LE A | EQ A | NE A)*;
+A           = B ( ADD B | SUB B)*;
+B           = C ( MUL C | DIV C)*;
+C           = NUM | ID | LP A RP;
